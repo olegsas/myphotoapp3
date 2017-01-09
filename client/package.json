@@ -1,0 +1,9 @@
+{
+  "name": "photoapp",
+  "scripts": {
+    "start": "nodemon server/server.js"
+  },
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}

@@ -39,16 +39,20 @@ myApp.config(function ($routeProvider) {
 myApp.run(function ($rootScope, $location, $route, AuthService) {
   $rootScope.$on('$routeChangeStart',
   function (event, next, current) {
+    console.log("begin");
+    //console.log("###next.access.restricted = "+!!(next.access.restricted));
     AuthService.getUserStatus()
     .then(function(data){
       console.log("")
       console.log("next.access.restricted = "+next.access.restricted);
       console.log("next = "+next);
       console.log("data = "+data);
-      if (next.access.restricted && !AuthService.isLoggedIn()) {
-        console.log("reroute - not logged in");
-        $location.path('/login');
-        $route.reload();
+      if(typeof next.access != "undefined"){
+        if (next.access.restricted && !AuthService.isLoggedIn()) {
+          console.log("reroute - not logged in");
+          $location.path('/login');
+          $route.reload();
+        }
       }
     });
   });
